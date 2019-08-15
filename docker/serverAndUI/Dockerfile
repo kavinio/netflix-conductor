@@ -26,8 +26,8 @@ RUN apt-get update -y \
   && apt-get install -y nodejs build-essential
 
 # Get and install conductor
-RUN git clone https://github.com/Netflix/conductor.git \
-  && cd conductor \
+RUN git clone https://github.com/kavinio/netflix-conductor.git \
+  && cd netflix-conductor \
   && ./gradlew build -x test \
 
   # Get Server Jar
