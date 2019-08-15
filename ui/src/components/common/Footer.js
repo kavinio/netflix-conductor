@@ -9,7 +9,7 @@ export default class Footer extends Component {
       sys: {}
     };
 
-    http.get('/api/sys/').then((data) => {
+    http.get('/api/sagas/ui/api/sys/').then((data) => {
       this.setState({
         sys: data.sys
       });

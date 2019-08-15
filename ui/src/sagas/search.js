@@ -34,12 +34,12 @@ function* doFetchSearchResults() {
   const fullQuery = join(queryParts, ' AND ');
   const freeText = (!isEmpty(query) && entirely) ? `"${query}"` : query;
 
-  const searchUrl = `/api/wfe/?q=${fullQuery}&h=${cutoff}&freeText=${freeText}&start=${start}`;
+  const searchUrl = `/api/sagas/ui/api/wfe/?q=${fullQuery}&h=${cutoff}&freeText=${freeText}&start=${start}`;
 
   try {
     // this is possible a task ID
     if (query.match(UUID_RE)) {
-      const taskSearchUrl = `/api/wfe/search-by-task/${query}?q=${fullQuery}&h=${cutoff}&start=${start}`;
+      const taskSearchUrl = `/api/sagas/ui/api/wfe/search-by-task/${query}?q=${fullQuery}&h=${cutoff}&start=${start}`;
 
       const [allResult, byTaskResult] = yield all([
         call(http.get, searchUrl),

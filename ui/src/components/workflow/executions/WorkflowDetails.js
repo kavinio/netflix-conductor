@@ -99,7 +99,7 @@ function showFailure(wf) {
 class WorkflowDetails extends React.Component {
     constructor(props) {
         super(props);
-        http.get('/api/sys/').then((data) => {
+        http.get('/api/sagas/ui/api/sys/').then((data) => {
             window.sys = data.sys;
         });
     }

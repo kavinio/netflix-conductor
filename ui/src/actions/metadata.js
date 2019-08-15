@@ -23,7 +23,7 @@ export function getWorkflowDefs() {
   return function (dispatch) {
     dispatch(fetchWorkflowMetadata());
 
-    return http.get('/api/wfe/metadata/workflow').then(data => {
+    return http.get('/api/sagas/ui/api/wfe/metadata/workflow').then(data => {
       dispatch(receiveWorkflowMetadata(data.result));
     }).catch((e) => {
       dispatch(failWorkflowMetadata(e));

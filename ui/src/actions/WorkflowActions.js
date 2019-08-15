@@ -9,7 +9,7 @@ export function getWorkflowDetails(workflowId){
     });
 
 
-    return http.get('/api/wfe/id/' + workflowId).then((data) => {
+    return http.get('/api/sagas/ui/api/wfe/id/' + workflowId).then((data) => {
       dispatch({
         type: 'RECEIVED_WORKFLOW_DETAILS',
         data
@@ -31,7 +31,7 @@ export function terminateWorkflow(workflowId){
     });
 
 
-    return http.delete('/api/wfe/terminate/' + workflowId).then((data) => {
+    return http.delete('/api/sagas/ui/api/wfe/terminate/' + workflowId).then((data) => {
       dispatch({
         type: 'RECEIVED_TERMINATE_WORKFLOW',
         workflowId
@@ -54,7 +54,7 @@ export function restartWorfklow(workflowId, withLatestVersion){
     });
 
 
-    return http.post('/api/wfe/restart/' + workflowId + "?useLatestDefinitions=" + (withLatestVersion || false)).then((data) => {
+    return http.post('/api/sagas/ui/api/wfe/restart/' + workflowId + "?useLatestDefinitions=" + (withLatestVersion || false)).then((data) => {
       dispatch({
         type: 'RECEIVED_RESTART_WORKFLOW',
         workflowId
@@ -76,7 +76,7 @@ export function retryWorfklow(workflowId){
     });
 
 
-    return http.post('/api/wfe/retry/' + workflowId).then((data) => {
+    return http.post('/api/sagas/ui/api/wfe/retry/' + workflowId).then((data) => {
       dispatch({
         type: 'RECEIVED_RETRY_WORKFLOW',
         workflowId
@@ -98,7 +98,7 @@ export function pauseWorfklow(workflowId) {
     });
 
 
-    return http.post('/api/wfe/pause/' + workflowId).then((data) => {
+    return http.post('/api/sagas/ui/api/wfe/pause/' + workflowId).then((data) => {
       dispatch({
         type: 'RECEIVED_PAUSE_WORKFLOW',
         workflowId
@@ -120,7 +120,7 @@ export function resumeWorfklow(workflowId) {
     });
 
 
-    return http.post('/api/wfe/resume/' + workflowId).then((data) => {
+    return http.post('/api/sagas/ui/api/wfe/resume/' + workflowId).then((data) => {
       dispatch({
         type: 'RECEIVED_RESUME_WORKFLOW',
         workflowId
@@ -141,7 +141,7 @@ export function getWorkflowDefs() {
       type: 'LIST_WORKFLOWS'
     });
 
-    return http.get('/api/wfe/metadata/workflow').then((data) => {
+    return http.get('/api/sagas/ui/api/wfe/metadata/workflow').then((data) => {
       dispatch({
         type: 'RECEIVED_LIST_WORKFLOWS',
         workflows : data
@@ -164,7 +164,7 @@ export function getWorkflowMetaDetails(name, version){
     });
 
 
-    return http.get('/api/wfe/metadata/workflow/' + name + '/' + version).then((data) => {
+    return http.get('/api/sagas/ui/api/wfe/metadata/workflow/' + name + '/' + version).then((data) => {
       dispatch({
         type: 'RECEIVED_WORKFLOW_DEF',
         name,
@@ -188,7 +188,7 @@ export function getTaskDefs() {
     });
 
 
-    return http.get('/api/wfe/metadata/taskdef').then((data) => {
+    return http.get('/api/sagas/ui/api/wfe/metadata/taskdef').then((data) => {
       dispatch({
         type: 'RECEIVED_TASK_DEFS',
         taskDefs: data
@@ -210,7 +210,7 @@ export function getQueueData() {
     });
 
 
-    return http.get('/api/wfe/queue/data').then((data) => {
+    return http.get('/api/sagas/ui/api/wfe/queue/data').then((data) => {
       dispatch({
         type: 'RECEIVED_POLL_DATA',
         queueData: data
@@ -233,7 +233,7 @@ export function getEventHandlers() {
     });
 
 
-    return http.get('/api/events').then((data) => {
+    return http.get('/api/sagas/ui/api/events').then((data) => {
       dispatch({
         type: 'RECEIVED_LIST_EVENT_HANDLERS',
         events : data

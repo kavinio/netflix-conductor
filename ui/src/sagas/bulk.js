@@ -9,7 +9,7 @@ function* sendBulkRequest(action) {
 
   console.log(action, operation, workflows);
 
-  const url = `/api/wfe/bulk/${operation}`;
+  const url = `/api/sagas/ui/api/wfe/bulk/${operation}`;
 
   let response;
 
