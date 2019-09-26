@@ -17,6 +17,8 @@ import redis.clients.jedis.JedisCommands;
 public class RedisClusterJedisProvider implements Provider<JedisCommands> {
 
     private final HostSupplier hostSupplier;
+    private static final int DEFAULT_TIMEOUT = 60000;
+    private static final int DEFAULT_MAX_ATTEMPTS = 5;
 
     @Inject
     public RedisClusterJedisProvider(HostSupplier hostSupplier){
@@ -30,6 +32,11 @@ public class RedisClusterJedisProvider implements Provider<JedisCommands> {
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
         poolConfig.setMinIdle(5);
         poolConfig.setMaxTotal(1000);
-        return new JedisCluster(new HostAndPort(host.getHostName(), host.getPort()), poolConfig);
+        return new JedisCluster(new HostAndPort(host.getHostName(), host.getPort()),
+                DEFAULT_TIMEOUT,
+                DEFAULT_TIMEOUT,
+                DEFAULT_MAX_ATTEMPTS,
+                host.getPassword(),
+                poolConfig);
     }
 }
