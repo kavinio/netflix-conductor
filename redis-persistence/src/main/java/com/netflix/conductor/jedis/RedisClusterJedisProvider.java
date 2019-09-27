@@ -17,7 +17,7 @@ import redis.clients.jedis.JedisCommands;
 public class RedisClusterJedisProvider implements Provider<JedisCommands> {
 
     private final HostSupplier hostSupplier;
-    private static final int DEFAULT_TIMEOUT = 60000;
+    private static final int DEFAULT_TIMEOUT = 300000;
     private static final int DEFAULT_MAX_ATTEMPTS = 5;
 
     @Inject
