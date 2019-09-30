@@ -32,11 +32,6 @@ public class RedisClusterJedisProvider implements Provider<JedisCommands> {
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
         poolConfig.setMinIdle(5);
         poolConfig.setMaxTotal(1000);
-        return new JedisCluster(new HostAndPort(host.getHostName(), host.getPort()),
-                DEFAULT_TIMEOUT,
-                DEFAULT_TIMEOUT,
-                DEFAULT_MAX_ATTEMPTS,
-                host.getPassword(),
-                poolConfig);
+        return new JedisCluster(new HostAndPort(host.getHostName(), host.getPort()), poolConfig);
     }
 }
