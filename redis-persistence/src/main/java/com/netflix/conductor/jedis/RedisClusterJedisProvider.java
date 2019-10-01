@@ -14,6 +14,11 @@ import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisCommands;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashSet;
+import java.util.Set;
+
 public class RedisClusterJedisProvider implements Provider<JedisCommands> {
 
     private final HostSupplier hostSupplier;
@@ -28,10 +33,25 @@ public class RedisClusterJedisProvider implements Provider<JedisCommands> {
     @Override
     public JedisCommands get() {
         // FIXME This doesn't seem very safe, but is how it was in the code this was moved from.
+        // this should give redisConfigEndpoint
         Host host = new ArrayList<Host>(hostSupplier.getHosts()).get(0);
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
         poolConfig.setMinIdle(5);
         poolConfig.setMaxTotal(1000);
+        try {
+            InetAddress[] allAddress = InetAddress.getAllByName(host.getHostName());
+            Set<HostAndPort> allNodes = new HashSet<HostAndPort>();
+            // this will collect ip of all the nodes
+            for(InetAddress address : allAddress) {
+                allNodes.add(new HostAndPort(address.getHostAddress(), host.getPort()));
+            }
+            if(!allNodes.isEmpty()) {
+                return new JedisCluster(allNodes, poolConfig);
+            }
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
         return new JedisCluster(new HostAndPort(host.getHostName(), host.getPort()), poolConfig);
     }
 }
