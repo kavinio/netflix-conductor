@@ -513,10 +513,19 @@ public class ElasticSearchRestDAOV5 implements IndexDAO {
             return null;
         }
 
+        logger.debug("#########################################");
+        logger.debug("fieldToGet = " + fieldToGet);
         if (response.isExists()){
+            logger.debug("inside response exists");
             Map<String, Object> sourceAsMap = response.getSourceAsMap();
             if (sourceAsMap.containsKey(fieldToGet)){
+                logger.debug("inside sourceAsMap.containsKey");
                 return sourceAsMap.get(fieldToGet).toString();
+            }
+
+            if (sourceAsMap.containsKey("_source")){
+                logger.debug("inside sourceAsMap.containsKey(\"_source\")");
+                return sourceAsMap.get("_source").toString();
             }
         }
 
