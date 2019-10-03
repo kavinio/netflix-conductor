@@ -43,8 +43,8 @@ configure(javaProjects) {
     apply plugin: 'java'
     apply plugin: 'project-report'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 
     dependencies {
         testCompile "junit:junit:${revJUnit}"

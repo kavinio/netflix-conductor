@@ -522,11 +522,6 @@ public class ElasticSearchRestDAOV5 implements IndexDAO {
                 logger.debug("inside sourceAsMap.containsKey");
                 return sourceAsMap.get(fieldToGet).toString();
             }
-
-            if (sourceAsMap.containsKey("_source")){
-                logger.debug("inside sourceAsMap.containsKey(\"_source\")");
-                return sourceAsMap.get("_source").toString();
-            }
         }
 
         logger.debug("Unable to find Workflow: {} in ElasticSearch index: {}.", workflowInstanceId, indexName);
